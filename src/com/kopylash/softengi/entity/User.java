@@ -13,13 +13,13 @@ public class User {
     private int id;
     private String name;
     private String surname;
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.PERSIST})
     @JoinColumn(name="address_id")
     private Address address;
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.PERSIST})
     @JoinColumn(name="employers_id")
     private Employer employer;
-    @OneToOne(mappedBy = "user",cascade = CascadeType.REMOVE)
+    @OneToOne(mappedBy = "user",cascade = {CascadeType.REMOVE,CascadeType.MERGE,CascadeType.PERSIST})
     private Deposit deposit;
 
     public int getId() {

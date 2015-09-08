@@ -17,6 +17,8 @@ public interface Dao<T, I>
 
     T save(T newsEntry);
 
+    T insert(T newsEntry);
+
 
     void delete(I id);
 

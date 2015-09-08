@@ -59,7 +59,6 @@ public class Deposit {
         if (id != deposit.id) return false;
         if (!amount.equals(deposit.amount)) return false;
         if (!currency.equals(deposit.currency)) return false;
-        if (!user.equals(deposit.user)) return false;
 
         return true;
     }
@@ -69,7 +68,6 @@ public class Deposit {
         int result = id;
         result = 31 * result + amount.hashCode();
         result = 31 * result + currency.hashCode();
-        result = 31 * result + user.hashCode();
         return result;
     }
 

@@ -14,7 +14,7 @@ public class Employer {
     private String company;
     @Column(name = "activity_field")
     private String activityField;
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.PERSIST})
     @JoinColumn(name = "address_id")
     private Address address;
 

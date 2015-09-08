@@ -10,3 +10,28 @@ table {
 td {
     padding:5px 10px;
 }
+
+.btn {
+    display:block;
+    width:200px;
+    line-height:50px;
+    background: lightyellow;
+    border-radius: 4px;
+    margin: 20px auto;
+    text-decoration: none;
+    text-transform: uppercase;
+    text-align: center;
+    font-size:20px;
+}
+.user-info {
+    width:150px;
+    margin: 5px auto;
+}
+
+.bold {
+    font-weight:bold;
+    font-size: 1.2em;
+}
+input {
+    display:block;
+}

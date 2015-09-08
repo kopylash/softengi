@@ -64,6 +64,13 @@ public class JpaDao<T, I> implements Dao<T, I> {
         return merge;
     }
 
+    @Override
+    @Transactional
+    public T insert(T entity) {
+        entityManager.persist(entity);
+        return entity;
+    }
+
 
     @Override
     @Transactional

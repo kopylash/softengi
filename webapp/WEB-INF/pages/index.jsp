@@ -15,6 +15,7 @@
         <th>Work</th>
         <th>Address</th>
         <th>Deposit</th>
+        <th>Actions</th>
     </tr>
     <c:forEach items="${userList}" var="user">
         <tr>
@@ -23,9 +24,13 @@
             <td>${user.employer}</td>
             <td>${user.address}</td>
             <td>${user.deposit}</td>
+            <td><a href="/edit/${user.id}">Edit</a>
+                <a href="/delete/${user.id}">Delete</a></td>
         </tr>
     </c:forEach>
 </table>
+
+<a href="/create" class="btn">create user</a>
 
 </body>
 </html>
