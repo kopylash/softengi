@@ -36,15 +36,8 @@ public class UserController {
 
     @RequestMapping(value="/create",method=RequestMethod.GET)
     public String createUser(ModelMap model) {
-        User newUser=new User();
-        newUser.setAddress(new Address());
-        Deposit deposit = new Deposit();
-        deposit.setUser(newUser);
-        newUser.setDeposit(deposit);
-        Employer employer = new Employer();
-        employer.setAddress(new Address());
-        newUser.setEmployer(employer);
-        model.addAttribute("newUser",newUser);
+
+        model.addAttribute("newUser",createNewEmptyUser());
         return VIEW_CREATE;
     }
 
@@ -61,8 +54,12 @@ public class UserController {
         return VIEW_EDIT;
     }
 
-    @RequestMapping(value="edit/editUser",method=RequestMethod.POST)
-    public String editUser(@ModelAttribute("user") User user,BindingResult result, ModelMap model) {
+
+    @RequestMapping(value="edit/editUser/{id}",method=RequestMethod.POST)
+    public String editUser(@ModelAttribute("user") User user,@PathVariable("id") Integer id,BindingResult result, ModelMap model) {
+        user.setId(id);
+        //something strange with ids
+        //they aren't saved, so merge creates new instance every time
         userService.updateUser(user);
         return "redirect:/";
     }
@@ -71,5 +68,18 @@ public class UserController {
     public String deleteUser(@PathVariable("id") Integer id) {
         userService.deleteUser(id);
         return "redirect:/";
+    }
+
+
+    private User createNewEmptyUser() {
+        User newUser=new User();
+        newUser.setAddress(new Address());
+        Deposit deposit = new Deposit();
+        deposit.setUser(newUser);
+        newUser.setDeposit(deposit);
+        Employer employer = new Employer();
+        employer.setAddress(new Address());
+        newUser.setEmployer(employer);
+        return newUser;
     }
 }

@@ -45,7 +45,6 @@ public class Address {
 
         Address address = (Address) o;
 
-        if (id != address.id) return false;
         if (!city.equals(address.city)) return false;
         if (!street.equals(address.street)) return false;
 
@@ -54,8 +53,7 @@ public class Address {
 
     @Override
     public int hashCode() {
-        int result = id;
-        result = 31 * result + city.hashCode();
+        int result = city.hashCode();
         result = 31 * result + street.hashCode();
         return result;
     }

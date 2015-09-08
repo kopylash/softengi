@@ -57,9 +57,8 @@ public class Employer {
 
         Employer employer = (Employer) o;
 
-        if (id != employer.id) return false;
         if (!activityField.equals(employer.activityField)) return false;
-        if (!address.equals(employer.address)) return false;
+        if (address != null ? !address.equals(employer.address) : employer.address != null) return false;
         if (!company.equals(employer.company)) return false;
 
         return true;
@@ -67,10 +66,9 @@ public class Employer {
 
     @Override
     public int hashCode() {
-        int result = id;
-        result = 31 * result + company.hashCode();
+        int result = company.hashCode();
         result = 31 * result + activityField.hashCode();
-        result = 31 * result + address.hashCode();
+        result = 31 * result + (address != null ? address.hashCode() : 0);
         return result;
     }
 

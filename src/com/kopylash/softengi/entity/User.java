@@ -19,7 +19,7 @@ public class User {
     @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.PERSIST})
     @JoinColumn(name="employers_id")
     private Employer employer;
-    @OneToOne(mappedBy = "user",cascade = {CascadeType.REMOVE,CascadeType.MERGE,CascadeType.PERSIST})
+    @OneToOne(mappedBy = "user",cascade = {CascadeType.REMOVE,CascadeType.MERGE})
     private Deposit deposit;
 
     public int getId() {
@@ -78,9 +78,9 @@ public class User {
         User user = (User) o;
 
         if (id != user.id) return false;
-        if (!address.equals(user.address)) return false;
-        if (!deposit.equals(user.deposit)) return false;
-        if (!employer.equals(user.employer)) return false;
+        if (address != null ? !address.equals(user.address) : user.address != null) return false;
+        if (deposit != null ? !deposit.equals(user.deposit) : user.deposit != null) return false;
+        if (employer != null ? !employer.equals(user.employer) : user.employer != null) return false;
         if (!name.equals(user.name)) return false;
         if (!surname.equals(user.surname)) return false;
 
@@ -92,9 +92,9 @@ public class User {
         int result = id;
         result = 31 * result + name.hashCode();
         result = 31 * result + surname.hashCode();
-        result = 31 * result + address.hashCode();
-        result = 31 * result + employer.hashCode();
-        result = 31 * result + deposit.hashCode();
+        result = 31 * result + (address != null ? address.hashCode() : 0);
+        result = 31 * result + (employer != null ? employer.hashCode() : 0);
+        result = 31 * result + (deposit != null ? deposit.hashCode() : 0);
         return result;
     }
 }

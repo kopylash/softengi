@@ -9,7 +9,7 @@
 </head>
 <body>
 <h1>Create user</h1>
-<form:form method="post" modelAttribute="user" action="editUser" >
+<form:form method="post" modelAttribute="user" action="editUser/${user.id}" >
     <div class="user-info">
         Name: <form:input type="text" name="name" required="true" path="name"/>
         Surname: <form:input type="text" name="surname" required="true" path="surname"/>
