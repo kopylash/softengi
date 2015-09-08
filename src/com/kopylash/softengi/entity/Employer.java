@@ -73,4 +73,11 @@ public class Employer {
         result = 31 * result + address.hashCode();
         return result;
     }
+
+    @Override
+    public String toString() {
+        return company +
+                ", " + activityField +
+                ", \n" + address.toString();
+    }
 }

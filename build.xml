@@ -14,6 +14,14 @@
     <property name="target.temp.dir" location="target/temp" />
     <property name="lib.dir" value="lib" />
 
+    <!-- install ivy if you don't have ivyide-->
+    <target name="ivy" description="Install ivy">
+        <mkdir dir="${user.home}/.ant/lib" />
+        <get dest="${user.home}/.ant/lib/ivy.jar"
+             src="http://search.maven.org/remotecontent?filepath=org/apache/ivy/ivy/2.4.0-rc1/ivy-2.4.0-rc1.jar" />
+    </target>
+    <!-- ivy end -->
+
     <!-- ivy start -->
     <target name="resolve" description="retrieve dependencies with ivy">
         <echo message="Getting dependencies..." />
@@ -25,13 +33,7 @@
 
     </target>
 
-    <!-- install ivy if you don't have ivyide-->
-    <target name="ivy" description="Install ivy">
-        <mkdir dir="${user.home}/.ant/lib" />
-        <get dest="${user.home}/.ant/lib/ivy.jar"
-             src="http://search.maven.org/remotecontent?filepath=org/apache/ivy/ivy/2.4.0-rc1/ivy-2.4.0-rc1.jar" />
-    </target>
-    <!-- ivy end -->
+
 
     <!-- Compile Java source from ${src.dir} and output it to ${web.classes.dir} -->
     <target name="compile" depends="init, resolve" description="compile source code">
@@ -58,7 +60,7 @@
             description="create a war file">
 
         <!-- ivy get dependencies and put it in ${lib.dir} -->
-        <ivy:retrieve pattern="${lib.dir}/[artifact]-[revision].[ext]" conf="runtime" />
+        <ivy:retrieve pattern="${lib.dir}/[conf]/[artifact]-[type]-[revision].[ext]" conf="runtime" />
 
         <war destfile="${target.dir}/softengi.war" webxml="${web.dir}/WEB-INF/web.xml">
 

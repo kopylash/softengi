@@ -21,6 +21,6 @@ employers_id int references employers(id));
 
 create table deposits (
 id serial primary key not null,
-amount money not null,
+amount decimal(15,2) not null,
 currency varchar(3) not null,
 user_id int references users(id));

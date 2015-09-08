@@ -72,4 +72,9 @@ public class Deposit {
         result = 31 * result + user.hashCode();
         return result;
     }
+
+    @Override
+    public String toString() {
+        return amount + " " + currency;
+    }
 }

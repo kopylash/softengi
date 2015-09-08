@@ -59,4 +59,10 @@ public class Address {
         result = 31 * result + street.hashCode();
         return result;
     }
+
+    @Override
+    public String toString() {
+        return city +
+                ", " + street;
+    }
 }

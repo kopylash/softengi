@@ -8,6 +8,6 @@
 
         <property name="username" value="postgres"/>
         <property name="password" value="root"/>
-        <property name="url" value="jdbc:mysql://postgresql:5432/softengi"/>
+        <property name="url" value="jdbc:postgresql://localhost:5432/softengi"/>
     </bean>
 </beans>
