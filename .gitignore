@@ -1,7 +1,9 @@
 *.class
 
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
+.idea
+out
+target/
+softengi.iml
 
 # Package Files #
 *.jar
