@@ -6,7 +6,6 @@ import com.kopylash.softengi.entity.Employer;
 import com.kopylash.softengi.entity.User;
 import com.kopylash.softengi.service.UserService;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -27,36 +26,34 @@ public class UserController {
     @Inject
     private UserService userService;
 
-    @RequestMapping(value="/",method = {RequestMethod.GET,RequestMethod.HEAD})
+    @RequestMapping(value = "/", method = {RequestMethod.GET, RequestMethod.HEAD})
     public String showAllUsers(ModelMap model) {
-        model.addAttribute("userList",userService.getAllUsers());
-
+        model.addAttribute("userList", userService.getAllUsers());
         return VIEW_INDEX;
     }
 
-    @RequestMapping(value="/create",method=RequestMethod.GET)
-    public String createUser(ModelMap model) {
-
-        model.addAttribute("newUser",createNewEmptyUser());
+    @RequestMapping(value = "/create", method = RequestMethod.GET)
+    public String showCreateUserPage(ModelMap model) {
+        model.addAttribute("newUser", createNewEmptyUser());
         return VIEW_CREATE;
     }
 
-    @RequestMapping(value="/createNewUser",method=RequestMethod.POST)
-    public String createUser(@ModelAttribute("newUser") User newUser,BindingResult result,Model model) {
+    @RequestMapping(value = "/createNewUser", method = RequestMethod.POST)
+    public String createUser(@ModelAttribute("newUser") User newUser, BindingResult result, ModelMap model) {
         userService.createUser(newUser);
         return "redirect:/";
     }
 
-    @RequestMapping(value="/edit/{id}",method=RequestMethod.GET)
-    public String editUser(@PathVariable("id") Integer id, ModelMap model) {
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+    public String showEditUserPage(@PathVariable("id") Integer id, ModelMap model) {
         User user = userService.getById(id);
-        model.addAttribute("user",user);
+        model.addAttribute("user", user);
         return VIEW_EDIT;
     }
 
 
-    @RequestMapping(value="edit/editUser/{id}",method=RequestMethod.POST)
-    public String editUser(@ModelAttribute("user") User user,@PathVariable("id") Integer id,BindingResult result, ModelMap model) {
+    @RequestMapping(value = "edit/editUser/{id}", method = RequestMethod.POST)
+    public String editUser(@ModelAttribute("user") User user, @PathVariable("id") Integer id, BindingResult result, ModelMap model) {
         user.setId(id);
         //something strange with ids
         //they aren't saved, so merge creates new instance every time
@@ -64,7 +61,7 @@ public class UserController {
         return "redirect:/";
     }
 
-    @RequestMapping(value = "/delete/{id}",method=RequestMethod.GET)
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public String deleteUser(@PathVariable("id") Integer id) {
         userService.deleteUser(id);
         return "redirect:/";
@@ -72,7 +69,7 @@ public class UserController {
 
 
     private User createNewEmptyUser() {
-        User newUser=new User();
+        User newUser = new User();
         newUser.setAddress(new Address());
         Deposit deposit = new Deposit();
         deposit.setUser(newUser);
